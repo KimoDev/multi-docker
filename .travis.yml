@@ -21,3 +21,15 @@ after_success:
   - docker push iamkimo/multi-nginx
   - docker push iamkimo/multi-express
   - docker push iamkimo/multi-node-worker
+
+deploy:
+  provider: elasticbeanstalk
+  region: "us-east-2"
+  app: "Multi-docker"
+  env: "MultiDocker-env"
+  bucket_name: "elasticbeanstalk-us-east-2-245063871775"
+  bucket_path: "docker-multi"
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY

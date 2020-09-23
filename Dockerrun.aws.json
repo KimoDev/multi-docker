@@ -1,0 +1,36 @@
+{
+  "AWSEBDockerrunVersion": "2",
+  "containerDefinitions": [
+    {
+      "name": "client",
+      "image": "iamkimo/multi-react-client",
+      "hostname": "client",
+      "essential": false
+    },
+    {
+      "name": "server",
+      "image": "iamkimo/multi-express",
+      "hostname": "api",
+      "essential": false
+    },
+    {
+      "name": "worker",
+      "image": "iamkimo/multi-node-worker",
+      "hostname": "worker",
+      "essential": false
+    },
+    {
+      "name": "nginx",
+      "image": "iamkimo/multi-nginx",
+      "hostname": "nginx",
+      "essential": true,
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "containerPort": 80
+        }
+      ],
+      "Links": ["client", "server"]
+    }
+  ]
+}
