@@ -4,7 +4,7 @@ services:
     - docker
 
 before_install:
-  - docker build -t iamkimo/react-tests -f ./client/Dockerfile.dev ./client
+  - docker build -t iamkimo/react-tests -f ./Dockerfile.dev ./client
 
 script:
   - docker run -e CI=true iamkimo/react-test npm test -- --coverage
