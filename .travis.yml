@@ -1,0 +1,23 @@
+sudo: required
+language: generic
+services:
+    - docker
+
+before_install:
+  - docker build -t iamkimo/react-tests -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run -e CI=true iamkimo/react-test npm test -- --coverage
+
+after_success:
+  - docker build -t iamkimo/multi-react-client ./client
+  - docker build -t iamkimo/multi-nginx ./nginx
+  - docker build -t iamkimo/multi-express ./server
+  - docker build -t iamkimo/multi-node-worker ./worker
+  # Log in to the docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  # Take images and push to Docker Hub
+  - docker push iamkimo/multi-react-client
+  - docker push iamkimo/multi-nginx
+  - docker push iamkimo/multi-express
+  - docker push iamkimo/multi-node-worker
