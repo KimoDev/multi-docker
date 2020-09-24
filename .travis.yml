@@ -24,11 +24,11 @@ after_success:
 
 deploy:
   provider: elasticbeanstalk
-  region: "us-east-2"
-  app: "Multi-docker-app"
-  env: "MultiDockerApp-env"
-  bucket_name: "elasticbeanstalk-us-east-2-245063871775"
-  bucket_path: "Multi-docker-app"
+  region: "us-east-1"
+  app: "multi-docker-fib"
+  env: "MultiDockerFib-env"
+  bucket_name: "elasticbeanstalk-us-east-1-245063871775"
+  bucket_path: "multi-docker-fib"
   on:
     branch: master
   access_key_id: $AWS_ACCESS_KEY
